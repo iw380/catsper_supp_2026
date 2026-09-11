@@ -1,5 +1,7 @@
 # Supplementary Files
 
+Supplementary files for the 2026 Catsper paper. 
+
 ## A. Comparative genomics & sequence alignment
 - `homologsearch_v8.py` — retrieves sequences via UniProtKB/UniParc/NCBI APIs
 - `results/` — per-taxon FASTA output of `homologsearch_v8.py`
