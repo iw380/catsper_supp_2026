@@ -1,0 +1,22 @@
+spermwhale_nterminal.pdb, Physeter macrocephalus
+human_nterminal.pdb, Homo Sapiens
+rabbit_nterminal.pdb, Oryctolagus cuniculus
+molerat_nterminal.pdb, Heterocephalus glaber
+wombat_nterminal.pdb, Vombatus ursinus
+mouse_nterminalfixed.pdb, Mus musculus
+alligator_nterminal.pdb, Alligator mississippiensisc
+trpv1_human.pdb, Human TRPV1
+trpv2_human.pdb, Human TRPV2
+wallizard_nterminal.pdb, Podarcis muralis
+wallaby_nterminal.pdb, Notamacropus eugenii
+rhesus_nterminal.pdb, Macaca Mulatta
+possum_nterminal.pdb, Monodelphis domestica
+platypus_nterminal.pdb, Ornithorhynchus anatinus
+pig_nterminal.pdb, Sus scrofa
+lbrownbat_nterminal.pdb, Myotis lucifugus
+dolphin_nterminal.pdb, Tursiops truncatus
+dog_nterminal.pdb, Canis lupus familiaris
+bostaurus_nterminal.pdb, Bos taurus
+elephant_nterminal.pdb, Loxodonta africana
+pika_nterminal.pdb, Ochotona princeps
+damara_nterminal.pdb, Fukomys damarensis

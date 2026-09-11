@@ -1,0 +1,81 @@
+#!/bin/bash
+#SBATCH -A engr-lab-pappu
+#SBATCH -p "condo-pappu,general-cpu"
+#SBATCH -N 1
+#SBATCH -c 100
+#SBATCH -J pinchado
+#SBATCH --output=PythonRun.%J
+#SBATCH --mail-type=ALL
+
+# SLURM wants a shell script pragma at the top, hence the #!/bin/bash.
+
+# You can completely remove the constraint line - our 100+ core machines are all tier4 or tier5, but unless your Python here is specifically compiled for something it's not needed.
+
+# Adding the  "general-cpu" to the partition helps the job get over to our big nodes.
+
+# The "-N 1" makes sure it stays on a single node.
+
+# The above BSUB parameters mean:
+#
+# -G: Use the group ENGR-Lab-Pappu (which all of the lab belongs to)
+#
+# -L: Use a custom shell for submitting the jobs. This is mainly to
+#     resolve a bug with LSF for job submissions using BSUB / LSF
+#     scripts like this.
+#
+# -o: This is the name of the output file. The `%J` means to output
+#     the job number. However, this can also be used to generate
+#     tags at the end of filenames: e.g. `MyJob.%J` which will create
+#     an output file such as `MyJob.1234567`.
+#
+# -R: This is a resource type allocator i.e. don't use hosts with gpus.
+#
+# -n: This is the number of cores being requested for this job. The default
+#     is 1 core. For single-core jobs, the parameter can be left empty.
+#     For multicore jobs, that value is required and should match the
+#     number of requested cores in your script.
+#
+# -J: This is the user-friendly name of the job. Useful for identifying
+#     the job when examining your jobs via `bjobs`.
+#
+# Other BSUB parameters that may be useful:
+#
+# -q:  The queues to submit the job to. Default queue: "normal". To query
+#      the available queues, do: `bqueues`. Note that not every queue can
+#      be submitted to.
+
+
+# Load the lab's default module (for PATH searching and access to some files).
+# module load engr-lab-pappu
+
+
+# Activate conda:
+#
+# Note: `conda` is usually active by default, but tends to be inactivated
+# as there is a bug with launching sessions on VNC when `conda` is present
+# in one's PATH. The command below activates it manually. You can determine
+# whether this step is necessary by running `which conda` in your SEAS terminal.
+# If the output is not empty, `conda` is active and the line below is not
+# required. However, keeping the line below will not break anything and be
+# thought of as a failsafe.
+source /project/engineering/anaconda3/bin/activate
+
+
+# Load your custom conda environment (e.g. pappuPython).
+#
+# Doing so ensures that your script will load the appropriate modules and 
+# run accordingly.
+conda activate nardini_env
+
+
+# Finally, run the Python script.
+#
+# Note that if your script has the shebang on the first line (e.g. `#!/usr/bin/env python`
+# or `#!/usr/bin/env python3`), directly passing the script to the `python` executable
+# is no longer necessary, although the script itself MUST be executable - i.e. 
+# (`chmod +x myscript.py`).
+#
+# Note that since this is a multicore job, the number of cores requested MUST match
+# the number of processes passed to our Python script.
+python nardini_calc_set_b1_random_seed.py --num-processes 100 --seqs catsper1_n_terminals_remove_bad_seqlist.txt
+
